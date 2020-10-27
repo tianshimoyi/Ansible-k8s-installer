@@ -1,0 +1,5 @@
+- name: restart k8s-installer-server
+  service: name=k8s-installer-server state=restarted
+
+- name: restart k8s-installer-client
+  service: name=k8s-installer-client state=restarted

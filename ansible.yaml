@@ -1,0 +1,30 @@
+---
+- hosts: private_warehouse
+  tasks:
+    - include_role:
+        name: private_warehouse
+- hosts: tls
+  tasks:
+    - include_role:
+        name: etcd_tls
+        tasks_from: tls_localhost_preparetion
+- hosts: etcd
+  remote_user: root
+  tasks:
+    - include_role:
+        name: etcd_tls
+        tasks_from: etcd
+- name: Configure k8s-install-server-side binaries
+  hosts: server
+  remote_user: root
+  tasks:
+    - include_role:
+        name: server_client
+        tasks_from: server
+- name: Configure k8s-install-client-side binaries
+  hosts: client
+  remote_user: root
+  tasks:
+    - include_role:
+        name: server_client
+        tasks_from: client

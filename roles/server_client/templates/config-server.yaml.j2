@@ -1,0 +1,109 @@
+api-server:
+  api-port: {{ message_queue_port +2 }}
+  enable-tls: false
+  jwt-expired-after-hours: 8
+  jwt-sign-method: HS256
+  jwt-sign-string: |-
+    LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFB
+    QUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUJGd0FBQUFkemMyZ3RjbgpOaEFBQUFB
+    d0VBQVFBQUFRRUFyYkdsenMrZHUwZmI4NE5IbU8wa1VtRU9iZEFkSisvaGhsZ3QzTFU0WWxBUXRO
+    cUY4VUw3Clp5VEY3cDdTcFB0UnFRY1FyUTJzbE8zQmEydEttZFRhcUdIOWF2YVpWRm5sOXU4Vmc4
+    NG02NGdoTjhuTlI4QnN0QjFBTjkKbDl1K1BQYTR5TFF5WkY1dzZaSVA0Vy9RV2tkaHRxYWE5WkZR
+    Sk5qeW55N3FZc1B5QTRPODI4dFNOaldRSHU2YUNVK1RiTgpLRU1sUnB2RmhWMStmOTJxWGpkalBi
+    YS9DTys0bUhNNTMvby9VeW5TSlZ2eU9WUE4vdGErN29GQUhydnFLZXFYbFR5eEx0CnZveGNVWHpv
+    ZzNlY1F1NGdRaFFLSzAzSWZ4aG9LSjNaYnA0VGtxdm9HUGJ0S2NmYStIZ0Z1eXFncTI3T1dKYSta
+    Q2oweEMKclFLQUtpQWo3UUFBQThnOFNSNmtQRWtlcEFBQUFBZHpjMmd0Y25OaEFBQUJBUUN0c2FY
+    T3o1MjdSOXZ6ZzBlWTdTUlNZUQo1dDBCMG43K0dHV0MzY3RUaGlVQkMwMm9YeFF2dG5KTVh1bnRL
+    aysxR3BCeEN0RGF5VTdjRnJhMHFaMU5xb1lmMXE5cGxVCldlWDI3eFdEemlicmlDRTN5YzFId0d5
+    MEhVQTMyWDI3NDg5cmpJdERKa1huRHBrZy9oYjlCYVIyRzJwcHIxa1ZBazJQS2YKTHVwaXcvSURn
+    N3pieTFJMk5aQWU3cG9KVDVOczBvUXlWR204V0ZYWDUvM2FwZU4yTTl0cjhJNzdpWWN6bmYrajlU
+    S2RJbApXL0k1VTgzKzFyN3VnVUFldStvcDZwZVZQTEV1MitqRnhSZk9pRGQ1eEM3aUJDRkFvclRj
+    aC9HR2dvbmRsdW5oT1NxK2dZCjl1MHB4OXI0ZUFXN0txQ3JiczVZbHI1a0tQVEVLdEFvQXFJQ1B0
+    QUFBQUF3RUFBUUFBQVFBK1F1T3drbk56NG5wUmU4bDYKWStjVk1IMC9sODRidHIwY3J4Y2hla1JQ
+    Mld0anFNRkNqa1FYNFBLaWFvUVBaNWNLQStKU1pnaHJDaDYvSnFLREtlMkhWagpqRTBzaDdtQTM2
+    eWhEb1FrbHBQRTdMOUthRkJkRHhiMXJKcWtpTHhVbGd2K3hia2FpVS9vS2RkUGRBazNrMGJQZGtF
+    dHJYCjBRK0VOZ0ZDMG9ZaHlnOVZJSDVFQVdHOEgxZWRaOTVRRGsyZmJaYmJkdmJKUExJRjJEeWNr
+    ZlBLUmpZRkZKa2paV3hzcDMKUzJ4cXpkaE1IblNvZ0RWZ0ptalhKQ00vUTZZdTdBU1NvVTN0OFNl
+    VThtY1J0ZitDZUM1VnNNbkt3MFZNdjNmNnlCcmhObwprWGNsR0p0NVZrT3Y5ZlpXc3ZmUHprRFY4
+    M0RrOUhYVWNwZS9SNlYwVWJCeEFBQUFnQVA1QkNkbURKZ28vYkxONTZuZUJnCnoxNkpSdnBCbGFX
+    aENNTmZFNWUzVVZnQkpPWXRQRnpEN3NrSWZOVzRFdXQ3Rm94clJRUjBpenhHcGFuUTNRNitmNHR3
+    MW0KVi9ScGY5ZGdaV0dpS3dsR2gwMHlDQkx3Y2dPaXl5cUpNbllIaWJ1U1ZXOU1KanFSaE53T05C
+    NGtWczhhVUxEVWZVNWkvLwpKS2FhTkVrZmFMQUFBQWdRRGg3WlZUVjBHQ0lxK0Uwd24yckJwNlhx
+    RzA4dTZMTVpwbURZMFFXR3BvZElaWjEvazBmbzRFCngxN1RNZ3ZqNlkvYlBWZkl3TXVCS0ovNk5W
+    OVFsUmJydm5GYTd4elVGUENoWFRZNTVNNDFGaTJ0VDJNS2N0STA4VHlDNk8KSlFRYUJCNTlURXJx
+    NlRQclZWLzVySFptSVB2TEtKY1hibTNIUHlybmpLMGxGbmt3QUFBSUVBeE5BMG9EMS8xQk5PMTh0
+    YgozUENiZjZwdDVDeitQRitxNlZlb082U2N1T3VEL3hHNWQ0RC83ZnEweHNWVEVlTTB3UWFTYVVK
+    c3BQeC93VVhyMmZzWXRFCjNMUkh4cGp5bDdJV2NTOE14cFhNRWE5RDl6Y04wMTdmZHd5Y2tMWCtI
+    akdnWGlpQW1vTUE5UTlHSXU2VHFkQWZ1S1VtYTkKV2tzNmhGNUVRem9BZG44QUFBQU9jbTl2ZEVC
+    emFXMXZibk10Y0dNQkFnTUVCUT09Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+  resource-server-cidr: ""
+  resource-server-filepath: /tmp/k8s-installer/resource
+  resource-server-port: 10089
+etcd:
+  etcd-auth-mode: tls
+  etcd-ca-file-path: {{project_template_path}}/etcd/etcd-client-ca.crt
+  etcd-cert-file-path: {{project_template_path}}/etcd/etcd-client.crt
+{% set server_length=groups['server'] | length %}
+{% set endpoints = "" %}
+{% if server_length ==1 %}
+  etcd-endpoints: https://{{groups['server'][0]}}:2379
+{% else %}
+{% for point in groups['server'] %}
+{% if server_length >1 %}
+{% set endpoints=endpoints ~ 'https://' ~ point ~ ':2379 | ' %}
+{% else %}
+{% set endpoints=endpoints ~ 'https://' ~ point ~ ':2379' %}
+  etcd-endpoints: {{endpoints}}
+{% endif %}
+{% set server_length=server_length - 1 %}
+{% endfor %}
+{% endif %}
+  etcd-key-file-path: {{project_template_path}}/etcd/etcd-client.key
+  etcd-password: password
+  etcd-username: user
+host-requirement:
+  check-kernel-version: false
+  check-os-family: true
+  kernel-major: 3
+  kernel-sub: 10
+  kernel-ver: 0
+  support-os-family: centos,ubuntu
+  support-os-family-version: 7,
+log:
+  log-level: 6
+message-queue:
+  auth-mode: basic
+  ca-cert-path: ""
+  cert-path: ""
+  key-path: ""
+  message-queue-group-name: caas-node-status-report-queue
+{% set first = groups['server'][0] %}
+  message-queue-leader: {{hostvars[first]['ip']}}
+  message-queue-node-status-report-in-subject: caas-node-status-report-subject
+{% set endpoints = "" %}
+{% for point in groups['server'] %}
+{% if server_length >1 %}
+{% set endpoints=endpoints ~  hostvars[point]['ip']  ~ ',' %}
+{% else %}
+{% set endpoints=endpoints ~  hostvars[point]['ip']  %}
+  message-queue-server-address: {{endpoints}}  # 消息队列启动在 server 的地址
+{% endif %}
+{% set server_length=server_length-1 %}
+{% endfor %}
+  message-queue-server-listening-on: 0.0.0.0
+  message-queue-subject-suffix: k8s-install
+  password: password
+  port: {{message_queue_port}}
+  time-out-seconds: 10
+  username: username
+server-message-timeout-config:
+  task-basic-config-timeout: 5
+  task-cri-timeout: 300
+  task-kubeadm-init-first-control-plane-timeout: 300
+  task-kubeadm-join-control-plane-timeout: 300
+  task-kubeadm-join-worker-timeout: 300
+  task-kubectl-timeout: 5
+  task-prepare-offline-resource: 0
+  task-rename-hostname-timeout: 3
+  task-vip-timeout: 60
+signal-port: {{signal_port}}

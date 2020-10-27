@@ -1,0 +1,8 @@
+- name: copy images
+  copy: src="{{image_path}}" dest="{{target_location}}"
+- name: docker load images
+  shell: docker load < {{target_location}}{{imagesname}}
+- name: 修改docker tag标签
+  shell: for mes in $(docker images --format "{{'{{'}}.Repository{{'}}'}}:{{'{{'}}.Tag{{'}}'}}");do docker tag $mes {{ansible_hostname}}:5000/$mes;done
+- name: push到本:地仓库
+  shell: for mes in $(docker images --format "{{'{{'}}.Repository{{'}}'}}:{{'{{'}}.Tag{{'}}'}}" | grep '^{{ansible_hostname}}');do docker push $mes;done

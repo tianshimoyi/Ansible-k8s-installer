@@ -1,0 +1,17 @@
+[Unit]
+Description=k8s-installer-client
+After=network-online.target
+
+[Service]
+Environment="HOME=/root"
+Type=simple
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=0
+ExecStart=/usr/bin/client
+ExecReload=/bin/kill -HUP
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+

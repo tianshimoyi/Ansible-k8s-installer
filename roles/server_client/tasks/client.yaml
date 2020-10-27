@@ -1,0 +1,33 @@
+- name: edit /etc/hosts
+  shell: while read line;do grep "$line" /etc/hosts &> /dev/null && [ $? -eq 0 ] || echo "$line" >> /etc/hosts;done < /tmp/hosts.txt
+
+- name: mkdir .k8s_installer
+  file: path=/root/.k8s-installer state=directory
+
+- name: mkdir /etc/etsi-api-deployment/etcd
+  file: path=/etc/etsi-api-deployment/etcd state=directory
+
+- name: copy  etcd-client-ca.crt
+  copy: src={{localhost_tls_dir}}/etcd-client-ca.crt dest={{project_template_path}}/etcd/
+
+- name: copy etcd-client.crt
+  copy: src={{localhost_tls_dir}}/etcd-client.crt dest={{project_template_path}}/etcd/
+
+- name: copy etcd-client.key
+  copy: src={{localhost_tls_dir}}/etcd-client.key dest={{project_template_path}}/etcd/
+
+- name: copy config-client.yaml
+  template: src=config-client.yaml.j2 dest=/root/.k8s-installer/config-client.yaml
+  notify: restart k8s-installer-client
+
+- name: copy client binary file
+  copy: src={{client_path}} dest=/usr/bin/ mode=0755
+
+- name: copy client.service
+  template: src=client.service.j2 dest=/etc/systemd/system/k8s-installer-client.service
+
+- name: systemctl daemon-reload
+  shell: systemctl daemon-reload
+
+- name: start client
+  service: name=k8s-installer-client state=started enabled=yes

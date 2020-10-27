@@ -1,0 +1,89 @@
+[all:vars]
+##部署私有仓库
+#部署节点镜像的父文件夹路径
+base_path="/tmp/caas4-component-images"
+##镜像名
+imagesname="caas4-component-images-20200812.tgz"
+##镜像路径
+image_path="{{ base_path+'/'+imagesname}}"
+##部署目标节点的镜像存放路径
+target_location="/root/private_warehouse/"
+##部署节点rpm包路径
+rpm_path="/tmp/rpms/"
+##部署目标节点rpm包路径
+rpm_target_location="/root/private_warehouse/"
+##部署节点registry镜像包路径
+registry_path="/tmp/registry.tar"
+##目标节点registry镜像包路径
+target_registry_location="/root/private_warehouse/"
+
+##部署3节点的etcd数据库使用tls
+#basic section starts
+project_template_path="/etc/etsi-api-deployment"
+#部署节点etcd存放路径
+etcd_path="/tmp/etcd_tls_resources/etcd"
+#部署节点etcdctl存放路径
+etcdctl_path="/tmp/etcd_tls_resources/etcdctl"
+#部署节点的证书生成路径
+localhost_tls_dir="/etc/etsi-api-tls-dir"
+#部署节点cfssl存放路径
+cfssl_path="/tmp/cfssl"
+#部署节点cfssljson存放路径
+cfssljson_path="/tmp/cfssljson"
+tls_c="CHINA"
+tls_l="Shanghai"
+tls_o="99cloud"
+tls_st="Shanghai"
+tls_ou="CAAS"
+#部署目标节点的详细信息
+etcd_node1_ip="10.0.0.101"
+etcd_node1_hostname="etcd01"
+etcd_node1_domain=""
+etcd_node1_fqdn="{{ etcd_node1_hostname + '.' + etcd_node1_domain }}"
+etcd_node1_address_set="{{ etcd_node1_ip + ',' + etcd_node1_hostname + '.' + etcd_node1_domain + ',' + etcd_node1_hostname }}"
+etcd_node2_ip="10.0.0.102"
+etcd_node2_hostname="etcd02"
+etcd_node2_domain=""
+etcd_node2_fqdn="{{ etcd_node2_hostname + '.' + etcd_node2_domain }}"
+etcd_node2_address_set="{{ etcd_node2_ip + ',' + etcd_node2_hostname + '.' + etcd_node2_domain + ',' + etcd_node2_hostname }}"
+etcd_node3_ip="10.0.0.103"
+etcd_node3_hostname="etcd03"
+etcd_node3_domain=""
+etcd_node3_fqdn="{{ etcd_node3_hostname + '.' + etcd_node3_domain }}"
+etcd_node3_address_set="{{ etcd_node3_ip + ',' + etcd_node3_hostname + '.' + etcd_node3_domain + ',' + etcd_node3_hostname }}"
+#配置/etc/hosts信息的hosts文件地址
+hosts_path="/tmp/hosts.txt"
+
+##server-client二进制文件
+offline="true"
+#server二进制文件地址
+server_path="/tmp/server_client_resources/x86/server"   #x86
+#server_path="/tmp/server_client_resources/arm/server"  #arm
+##client二进制文件地址
+client_path="/tmp/server_client_resources/x86/client"   #x86
+#client_path="/tmp/server_client_resources/arm/client"  #arm
+signal_port=9090
+message_queue_port=9889
+
+#部署私有仓库目标节点hostname
+[private_warehouse]
+etcd01
+etcd02
+#部署etcd数据库使用tls目标节点hostname
+[etcd]
+etcd01
+etcd02
+etcd03
+[tls]
+localhost    ansible_connection=local
+
+#部署ansible工具第二部分
+#server主机的hostname和ip
+[server]
+localhost    ansible_connection=local ip=172.20.149.79
+
+#clinet主机的hostname
+[client]
+etcd01
+etcd02
+etcd03

@@ -1,0 +1,17 @@
+[Unit]
+Description=k8s-installer-server
+After=network-online.target
+
+[Service]
+Environment="HOME=/root"
+Type=simple
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=0
+ExecStart=/usr/bin/server
+ExecReload=/bin/kill -HUP
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+

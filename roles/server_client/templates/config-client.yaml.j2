@@ -1,0 +1,63 @@
+cache:
+{% set server_length=groups['server'] | length %}
+{%  if server_length >1 %}
+  cache-runtime: no-cache
+{% else %}
+  cache-runtime: local-ram
+{% endif %}
+client-id: #请不要手动设置，会自动生成，除非你希望手动设置改节点的 id，默认生成规则为 server+[ipv4 gateway所在网卡的ip]
+etcd:
+  etcd-auth-mode: tls
+  etcd-ca-file-path: {{project_template_path}}/etcd-client-ca.crt
+  etcd-cert-file-path: {{project_template_path}}/etcd-client.crt
+{% set endpoints = "" %}
+{% if server_length ==1 %}
+  etcd-endpoints: https://{{groups['server'][0]}}:2379
+{% else %}
+{% for point in groups['server'] %}
+{% if server_length >1 %}
+{% set endpoints=endpoints ~ 'https://' ~ point ~ ':2379 | ' %}
+{% else %}
+{% set endpoints=endpoints ~ 'https://' ~ point ~ ':2379' %}
+  etcd-endpoints: {{endpoints}}
+{% endif %}
+{% set server_length=server_length - 1 %}
+{% endfor %}
+{% endif %}
+  etcd-key-file-path: {{project_template_path}}/etcd-client.key
+  etcd-password: ""
+  etcd-username: ""
+log:
+  log-level: 6
+message-queue:
+  auth-mode: basic
+  ca-cert-path: ""
+  cert-path: ""
+  cluster-port: {{message_queue_port +1}}
+  key-path: ""
+  message-queue-group-name: caas-node-status-report-queue
+{% set first = groups['server'][0] %}
+  message-queue-leader: {{hostvars[first]['ip']}}
+  message-queue-node-status-report-in-subject: caas-node-status-report-subject
+{% set endpoints = "" %}
+{% for point in groups['server'] %}
+{% if server_length >1 %}
+{% set endpoints=endpoints ~ hostvars[point]['ip'] ~ ',' %}
+{% else %}
+{% set endpoints=endpoints ~ hostvars[point]['ip'] %}
+  message-queue-server-address: {{endpoints}}  # 消息队列启动在 server 的地址
+{% endif %}
+{% set server_length=server_length - 1 %}
+{% endfor %}
+  message-queue-server-listening-on: 0.0.0.0
+  message-queue-subject-suffix: k8s-install
+  password: password
+  port: {{message_queue_port}}
+  time-out-seconds: 10
+  username: username
+network-detector-address:
+offline: {{offline}}
+offline-package-path: /tmp/k8s-install-offline # 临时保存消息队列直接传输过来的文件存储位置
+signal-port: {{signal_port}} # 保持默认，客户端动态检测端口
+stat-report-in-frequency: 60 # 客户端汇报状态的频率
+yaml-data-dir: /tmp/k8s-install-yaml

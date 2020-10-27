@@ -1,0 +1,9 @@
+- name: copy registry image
+  copy: src={{registry_path}} dest={{target_registry_location}}
+- name: docker load registry
+  shell: docker load -i {{target_registry_location}}registry.tar
+- name: download registry
+  command: docker pull registry:2
+- name: start registry
+  shell: docker ps | grep registry &> /dev/null  && [ $? -eq 0 ] ||  docker run -d -p 5000:5000 --restart=always --name registry registry:2
+

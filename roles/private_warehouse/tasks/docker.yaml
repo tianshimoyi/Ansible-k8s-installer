@@ -1,0 +1,12 @@
+- name: copy rpms
+  copy: src={{rpm_path}} dest={{rpm_target_location}}
+- name: download-docker
+  shell: docker --version &> /dev/null && [ $? -eq 0 ] || rpm -ivh --replacefiles --replacepkgs --nodeps {{rpm_target_location}}/*.rpm
+- name: start docker
+  service: name=docker state=started enabled=yes
+- name: 配置daemon.json
+  template: src=daemon.json.j2 dest=/etc/docker/daemon.json
+- name: 运行daemon-reload
+  command: systemctl daemon-reload
+- name: 重启docker
+  service: name=docker state=restarted
